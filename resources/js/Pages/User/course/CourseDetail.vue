@@ -260,7 +260,6 @@
                                         <p class="m-0">
                                             {{ comment.comment }}
                                         </p>
-                                        
                                     </div>
 
                                     <div v-else class="">
@@ -275,7 +274,13 @@
                                         />
                                     </div>
                                 </div>
-                                <div v-if="$page.props.auth.user.id == comment.user_id" class="ms-3">
+                                <div
+                                    v-if="
+                                        $page.props.auth.user.id ==
+                                        comment.user_id
+                                    "
+                                    class="ms-3"
+                                >
                                     <div class="dropdown">
                                         <button
                                             class="m-0 p-0 btn btn-secondary rounded-circle d-flex justify-content-center align-items-center"
@@ -291,7 +296,7 @@
                                             style="background-color: #f9feff"
                                         >
                                             <li>
-                                                <Link 
+                                                <Link
                                                     @click="
                                                         handleEditComment(
                                                             index,
@@ -310,7 +315,7 @@
                                             </li>
 
                                             <li>
-                                                <Link 
+                                                <Link
                                                     class="dropdown-item"
                                                     :href="
                                                         route(
@@ -331,8 +336,6 @@
                                 </div>
                             </div>
                         </div>
-
-                       
                     </div>
                 </div>
             </div>
@@ -344,7 +347,7 @@
 import { Link, Head, useForm } from "@inertiajs/inertia-vue3";
 import UserLayout from "../Layout/UserLayout.vue";
 import { Inertia } from "@inertiajs/inertia";
-import { ref, nextTick , onMounted } from "vue";
+import { ref, nextTick, onMounted } from "vue";
 
 let editComment = ref(null);
 const editCommentInput = ref(null);
@@ -411,17 +414,15 @@ const handleEditComment = (id, comment) => {
     form.editComment = comment;
 
     nextTick(() => {
-        editCommentInput.value[0].focus(); 
+        editCommentInput.value[0].focus();
     });
 };
 
 const handleUpdateComment = (id) => {
-    form.post(
-        `/user/comment/update/${id}`,{
-            preserveScroll : true,
-            preserveState : true
-        }
-    );
+    form.post(`/user/comment/update/${id}`, {
+        preserveScroll: true,
+        preserveState: true,
+    });
     editComment = null;
 };
 </script>
